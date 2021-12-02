@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CaraImageModel(
     var title: String = "",
-    var description: String = "",
     var id: Long = 0,
     var image: Uri = Uri.EMPTY
 ) : Parcelable

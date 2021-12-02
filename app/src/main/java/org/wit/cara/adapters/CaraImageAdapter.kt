@@ -34,8 +34,7 @@ class CaraImageAdapter constructor(private var caraImages: List<CaraImageModel>,
 
         fun bind(caraImage: CaraImageModel, listener: PlacemarkListener) {
             binding.caraImageTitle.text = caraImage.title
-            binding.description.text = caraImage.description
-            Picasso.get().load(caraImage.image).resize(200,200).into(binding.imageIcon)
+            Picasso.get().load(caraImage.image).resize(380,250).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onPlacemarkClick(caraImage) }
         }
     }

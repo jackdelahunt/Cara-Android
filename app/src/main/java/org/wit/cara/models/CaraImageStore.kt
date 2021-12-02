@@ -32,7 +32,6 @@ class CaraImageMemStore : CaraImageStore {
         var foundCaraImage: CaraImageModel? = placemarks.find { p -> p.id == caraImage.id }
         if (foundCaraImage != null) {
             foundCaraImage.title = caraImage.title
-            foundCaraImage.description = caraImage.description
             foundCaraImage.image = caraImage.image
             logAll()
         }

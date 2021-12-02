@@ -39,7 +39,6 @@ class CaraImageActivity : AppCompatActivity() {
             edit = true
             caraImage = intent.extras?.getParcelable("placemark_edit")!!
             binding.caraImageTitle.setText(caraImage.title)
-            binding.description.setText(caraImage.description)
 
             binding.btnAdd.text = getString(R.string.button_edit_cara_image);
 
@@ -53,7 +52,6 @@ class CaraImageActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener() {
             caraImage.title = binding.caraImageTitle.text.toString()
-            caraImage.description = binding.description.text.toString()
             if (caraImage.title.isEmpty()) {
                 Snackbar.make(it,R.string.hint_cara_image_title   , Snackbar.LENGTH_LONG)
                     .show()
