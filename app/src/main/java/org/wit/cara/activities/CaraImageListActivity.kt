@@ -45,7 +45,7 @@ class CaraImageListActivity : AppCompatActivity(), PlacemarkListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, CaraImageActivity::class.java)
+                val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
                 refreshIntentLauncher.launch(launcherIntent)
             }
         }
@@ -53,7 +53,7 @@ class CaraImageListActivity : AppCompatActivity(), PlacemarkListener {
     }
 
     override fun onPlacemarkClick(caraImage: CaraImageModel) {
-        val launcherIntent = Intent(this, CaraImageActivity::class.java)
+        val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
         launcherIntent.putExtra("placemark_edit", caraImage)
         refreshIntentLauncher.launch(launcherIntent)
     }

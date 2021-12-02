@@ -11,14 +11,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.cara.R
-import org.wit.cara.databinding.ActivityPlacemarkBinding
+import org.wit.cara.databinding.ActivityCreateCaraImageBinding
 import org.wit.cara.helpers.showImagePicker
 import org.wit.cara.main.MainApp
 import org.wit.cara.models.CaraImageModel
 import timber.log.Timber.i
 
-class CaraImageActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPlacemarkBinding
+class CreateCaraImageActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCreateCaraImageBinding
         private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     var caraImage = CaraImageModel()
@@ -28,7 +28,7 @@ class CaraImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        binding = ActivityPlacemarkBinding.inflate(layoutInflater)
+        binding = ActivityCreateCaraImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         app = application as MainApp
