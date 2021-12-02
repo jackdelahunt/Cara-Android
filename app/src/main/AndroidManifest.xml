@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.wit.cara.activities.CaraImageActivity"
+            android:name="org.wit.cara.activities.CreateCaraImageActivity"
             android:exported="true">
         </activity>
     </application>

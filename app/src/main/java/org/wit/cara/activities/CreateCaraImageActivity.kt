@@ -11,14 +11,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.cara.R
-import org.wit.cara.databinding.ActivityPlacemarkBinding
+import org.wit.cara.databinding.ActivityCreateCaraImageBinding
 import org.wit.cara.helpers.showImagePicker
 import org.wit.cara.main.MainApp
 import org.wit.cara.models.CaraImageModel
 import timber.log.Timber.i
 
-class CaraImageActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPlacemarkBinding
+class CreateCaraImageActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCreateCaraImageBinding
         private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     var caraImage = CaraImageModel()
@@ -28,7 +28,7 @@ class CaraImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        binding = ActivityPlacemarkBinding.inflate(layoutInflater)
+        binding = ActivityCreateCaraImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         app = application as MainApp
@@ -39,7 +39,6 @@ class CaraImageActivity : AppCompatActivity() {
             edit = true
             caraImage = intent.extras?.getParcelable("placemark_edit")!!
             binding.caraImageTitle.setText(caraImage.title)
-            binding.description.setText(caraImage.description)
 
             binding.btnAdd.text = getString(R.string.button_edit_cara_image);
 
@@ -53,7 +52,6 @@ class CaraImageActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener() {
             caraImage.title = binding.caraImageTitle.text.toString()
-            caraImage.description = binding.description.text.toString()
             if (caraImage.title.isEmpty()) {
                 Snackbar.make(it,R.string.hint_cara_image_title   , Snackbar.LENGTH_LONG)
                     .show()
