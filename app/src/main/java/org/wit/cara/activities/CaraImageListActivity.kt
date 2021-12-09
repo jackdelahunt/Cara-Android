@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.cara.R
 import org.wit.cara.adapters.CaraImageAdapter
-import org.wit.cara.adapters.PlacemarkListener
+import org.wit.cara.adapters.CaraImageListener
 import org.wit.cara.databinding.ActivityCaraImageListBinding
 import org.wit.cara.main.MainApp
 import org.wit.cara.models.CaraImageModel
 
-class CaraImageListActivity : AppCompatActivity(), PlacemarkListener {
+class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityCaraImageListBinding
@@ -32,7 +32,7 @@ class CaraImageListActivity : AppCompatActivity(), PlacemarkListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = CaraImageAdapter(app.placemarks.findAll(),this)
+        binding.recyclerView.adapter = CaraImageAdapter(app.caraImages.findAll(),this)
 
         registerRefreshCallback()
     }
@@ -52,7 +52,7 @@ class CaraImageListActivity : AppCompatActivity(), PlacemarkListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onPlacemarkClick(caraImage: CaraImageModel) {
+    override fun onCaraImageClick(caraImage: CaraImageModel) {
         val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
         launcherIntent.putExtra("placemark_edit", caraImage)
         refreshIntentLauncher.launch(launcherIntent)
