@@ -7,12 +7,12 @@ import com.squareup.picasso.Picasso
 import org.wit.cara.databinding.CardCaraImageBinding
 import org.wit.cara.models.CaraImageModel
 
-interface PlacemarkListener {
-    fun onPlacemarkClick(caraImage: CaraImageModel)
+interface CaraImageListener {
+    fun onCaraImageClick(caraImage: CaraImageModel)
 }
 
 class CaraImageAdapter constructor(private var caraImages: List<CaraImageModel>,
-                                   private val listener: PlacemarkListener) :
+                                   private val listener: CaraImageListener) :
     RecyclerView.Adapter<CaraImageAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -32,10 +32,10 @@ class CaraImageAdapter constructor(private var caraImages: List<CaraImageModel>,
     class MainHolder(private val binding : CardCaraImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(caraImage: CaraImageModel, listener: PlacemarkListener) {
+        fun bind(caraImage: CaraImageModel, listener: CaraImageListener) {
             binding.caraImageTitle.text = caraImage.title
             Picasso.get().load(caraImage.image).resize(380,250).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onPlacemarkClick(caraImage) }
+            binding.root.setOnClickListener { listener.onCaraImageClick(caraImage) }
         }
     }
 }

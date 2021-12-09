@@ -57,9 +57,9 @@ class CreateCaraImageActivity : AppCompatActivity() {
                     .show()
             } else {
                 if (edit) {
-                    app.placemarks.update(caraImage.copy())
+                    app.caraImages.update(caraImage.copy())
                 } else {
-                    app.placemarks.create(caraImage.copy())
+                    app.caraImages.create(caraImage.copy())
                 }
             }
             setResult(RESULT_OK)

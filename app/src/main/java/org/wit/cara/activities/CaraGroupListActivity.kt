@@ -9,30 +9,31 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.cara.R
-import org.wit.cara.adapters.CaraImageAdapter
-import org.wit.cara.adapters.CaraImageListener
-import org.wit.cara.databinding.ActivityCaraImageListBinding
+import org.wit.cara.adapters.GroupAdapter
+import org.wit.cara.adapters.GroupListener
+import org.wit.cara.databinding.ActivityGroupListBinding
 import org.wit.cara.main.MainApp
-import org.wit.cara.models.CaraImageModel
+import org.wit.cara.models.GroupModel
+import timber.log.Timber.i
 
-class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
+class CaraGroupListActivity : AppCompatActivity(), GroupListener {
 
     lateinit var app: MainApp
-    private lateinit var binding: ActivityCaraImageListBinding
+    private lateinit var binding: ActivityGroupListBinding
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCaraImageListBinding.inflate(layoutInflater)
+        binding = ActivityGroupListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbar.title = title
+        binding.toolbar.title = R.string.group_list_title.toString()
         setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = CaraImageAdapter(app.caraImages.findAll(),this)
+        binding.recyclerView.adapter = GroupAdapter(app.groups.findAll(),this)
 
         registerRefreshCallback()
     }
@@ -45,16 +46,17 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
+                i("Open Create group window")
+                val launcherIntent = Intent(this, CreateGroupActivity::class.java)
                 refreshIntentLauncher.launch(launcherIntent)
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCaraImageClick(caraImage: CaraImageModel) {
-        val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
-        launcherIntent.putExtra("placemark_edit", caraImage)
+    override fun onGroupClick(group: GroupModel) {
+        val launcherIntent = Intent(this, CreateGroupActivity::class.java)
+        launcherIntent.putExtra("placemark_edit", group)
         refreshIntentLauncher.launch(launcherIntent)
     }
 
