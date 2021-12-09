@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Cara</string>
+    <string name="group_list_title">Groups</string>
     <string name="button_create_cara_image">Create</string>
     <string name="button_edit_cara_image">Edit</string>
     <string name="hint_cara_image_title">Cara Image Title</string>
+    <string name="hint_group_name">Group Name</string>
     <string name="hint_cara_image_description">Description </string>
     <string name="menu_add_cara_image">Add</string>
     <string name="hint_cara_image_create_fail">Please Enter a title</string>
