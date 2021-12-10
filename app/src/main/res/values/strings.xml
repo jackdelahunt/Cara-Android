@@ -11,4 +11,6 @@
     <string name="button_add_image">Add Image</string>
     <string name="button_edit_image">Choose Image</string>
     <string name="select_image">Select image</string>
+    <string name="hint_group_button">Groups</string>
+    <string name="hint_image_button">Images</string>
 </resources>
