@@ -55,8 +55,8 @@ class CaraGroupListActivity : AppCompatActivity(), GroupListener {
     }
 
     override fun onGroupClick(group: GroupModel) {
-        val launcherIntent = Intent(this, CreateGroupActivity::class.java)
-        launcherIntent.putExtra("placemark_edit", group)
+        val launcherIntent = Intent(this, CaraImageListActivity::class.java)
+        launcherIntent.putExtra("group", group)
         refreshIntentLauncher.launch(launcherIntent)
     }
 
