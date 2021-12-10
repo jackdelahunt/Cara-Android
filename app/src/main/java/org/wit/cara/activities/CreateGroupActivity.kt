@@ -28,6 +28,7 @@ class CreateGroupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         app = application as MainApp
+        binding.toolbarAdd.title =  resources.getString(R.string.group_activity_title);
 
         setSupportActionBar(binding.toolbarAdd)
 
