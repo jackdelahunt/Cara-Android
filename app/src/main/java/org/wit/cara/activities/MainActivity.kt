@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.imagesButton.setOnClickListener {
-            i("########### image button ###########")
+            val launcherIntent = Intent(this, CaraImageListActivity::class.java)
+            refreshIntentLauncher.launch(launcherIntent)
         }
 
         registerRefreshCallback()

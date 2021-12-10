@@ -66,8 +66,9 @@ class CreateCaraImageActivity : AppCompatActivity() {
                 if (edit) {
                     app.caraImages.update(caraImage.copy())
                 } else {
-                    group.caraImages.add(caraImage.copy())
-                    i("In image create found group")
+                    val newImage = caraImage.copy()
+                    group.caraImages.add(newImage)
+                    app.caraImages.placemarks.add(newImage)
                 }
             }
             setResult(RESULT_OK)

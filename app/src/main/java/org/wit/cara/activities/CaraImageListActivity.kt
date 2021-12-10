@@ -22,7 +22,7 @@ import timber.log.Timber.i
 class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
 
     lateinit var app: MainApp
-    private lateinit var group: GroupModel
+    private var group: GroupModel? = null
     private lateinit var binding: ActivityCaraImageListBinding
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
@@ -30,25 +30,32 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
         super.onCreate(savedInstanceState)
         binding = ActivityCaraImageListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
-        binding.toolbar.title = title
+        binding.toolbar.title = resources.getString(R.string.image_list_title);
+        setSupportActionBar(binding.toolbar)
 
         if (intent.hasExtra("group")) {
             group = intent.extras?.getParcelable("group")!!
-            group = app.groups.findById(group.id)!!
+            group = app.groups.findById(group!!.id)!!
         }
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = CaraImageAdapter(group.caraImages,this)
+
+        if (group != null) {
+            binding.recyclerView.adapter = CaraImageAdapter(group!!.caraImages, this)
+        } else {
+            binding.recyclerView.adapter = CaraImageAdapter(app.caraImages.findAll(), this)
+        }
 
         registerRefreshCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        if(group != null) {
+            menuInflater.inflate(R.menu.menu_main, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 

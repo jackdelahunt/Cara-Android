@@ -26,7 +26,7 @@ class CaraGroupListActivity : AppCompatActivity(), GroupListener {
         super.onCreate(savedInstanceState)
         binding = ActivityGroupListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbar.title = R.string.group_list_title.toString()
+        binding.toolbar.title = resources.getString(R.string.group_list_title);
         setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
