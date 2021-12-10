@@ -6,6 +6,7 @@ interface GroupStore {
     fun findAll(): List<GroupModel>
     fun create(group: GroupModel)
     fun update(group: GroupModel)
+    fun findById(id: Long): GroupModel?
 }
 
 class GroupMemStore : GroupStore {
@@ -26,5 +27,12 @@ class GroupMemStore : GroupStore {
         if (foundGroup != null) {
             foundGroup.name = group.name
         }
+    }
+
+    override fun findById(id: Long): GroupModel? {
+        for (group in groups)
+            if (group.id == id) return group
+
+        return null
     }
 }

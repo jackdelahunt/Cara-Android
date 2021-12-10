@@ -15,6 +15,7 @@ import org.wit.cara.databinding.ActivityCreateCaraImageBinding
 import org.wit.cara.helpers.showImagePicker
 import org.wit.cara.main.MainApp
 import org.wit.cara.models.CaraImageModel
+import org.wit.cara.models.GroupModel
 import timber.log.Timber.i
 
 class CreateCaraImageActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class CreateCaraImageActivity : AppCompatActivity() {
 
     var caraImage = CaraImageModel()
     var edit = false
+    private lateinit var group: GroupModel
     lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +52,11 @@ class CreateCaraImageActivity : AppCompatActivity() {
                 .into(binding.image)
         }
 
+        if (intent.hasExtra("group")) {
+            group = intent.extras?.getParcelable("group")!!
+            group = app.groups.findById(group.id)!!
+        }
+
         binding.btnAdd.setOnClickListener() {
             caraImage.title = binding.caraImageTitle.text.toString()
             if (caraImage.title.isEmpty()) {
@@ -59,7 +66,8 @@ class CreateCaraImageActivity : AppCompatActivity() {
                 if (edit) {
                     app.caraImages.update(caraImage.copy())
                 } else {
-                    app.caraImages.create(caraImage.copy())
+                    group.caraImages.add(caraImage.copy())
+                    i("In image create found group")
                 }
             }
             setResult(RESULT_OK)

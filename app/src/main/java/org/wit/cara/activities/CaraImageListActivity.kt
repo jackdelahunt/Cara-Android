@@ -1,6 +1,7 @@
 package org.wit.cara.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,16 +9,20 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.squareup.picasso.Picasso
 import org.wit.cara.R
 import org.wit.cara.adapters.CaraImageAdapter
 import org.wit.cara.adapters.CaraImageListener
 import org.wit.cara.databinding.ActivityCaraImageListBinding
 import org.wit.cara.main.MainApp
 import org.wit.cara.models.CaraImageModel
+import org.wit.cara.models.GroupModel
+import timber.log.Timber.i
 
 class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
 
     lateinit var app: MainApp
+    private lateinit var group: GroupModel
     private lateinit var binding: ActivityCaraImageListBinding
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
@@ -25,14 +30,19 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
         super.onCreate(savedInstanceState)
         binding = ActivityCaraImageListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
+        binding.toolbar.title = title
+
+        if (intent.hasExtra("group")) {
+            group = intent.extras?.getParcelable("group")!!
+            group = app.groups.findById(group.id)!!
+        }
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = CaraImageAdapter(app.caraImages.findAll(),this)
+        binding.recyclerView.adapter = CaraImageAdapter(group.caraImages,this)
 
         registerRefreshCallback()
     }
@@ -46,6 +56,7 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
+                launcherIntent.putExtra("group", group)
                 refreshIntentLauncher.launch(launcherIntent)
             }
         }
