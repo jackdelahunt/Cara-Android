@@ -1,5 +1,9 @@
 package org.wit.cara.models
 
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import org.wit.cara.main.MainApp
 import timber.log.Timber.i
 
 interface CaraImageStore {
@@ -17,6 +21,7 @@ internal fun getId(): Long {
 class CaraImageMemStore : CaraImageStore {
 
     val placemarks = ArrayList<CaraImageModel>()
+    lateinit var app: MainApp
 
     override fun findAll(): List<CaraImageModel> {
         return placemarks

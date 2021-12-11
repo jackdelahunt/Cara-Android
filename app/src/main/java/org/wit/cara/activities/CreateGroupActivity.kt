@@ -18,7 +18,6 @@ class CreateGroupActivity : AppCompatActivity() {
         private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     var group = GroupModel()
-    var edit = false
     lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +32,6 @@ class CreateGroupActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         if (intent.hasExtra("placemark_edit")) {
-            edit = true
             group = intent.extras?.getParcelable("placemark_edit")!!
             binding.groupName.setText(group.name)
         }
@@ -44,11 +42,7 @@ class CreateGroupActivity : AppCompatActivity() {
                 Snackbar.make(it,R.string.hint_cara_image_title   , Snackbar.LENGTH_LONG)
                     .show()
             } else {
-                if (edit) {
-                    app.groups.update(group.copy())
-                } else {
-                    app.groups.create(group.copy())
-                }
+                app.groups.create(group.copy())
             }
             setResult(RESULT_OK)
             finish()

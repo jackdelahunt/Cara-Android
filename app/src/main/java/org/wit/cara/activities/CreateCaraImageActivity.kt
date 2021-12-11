@@ -44,7 +44,7 @@ class CreateCaraImageActivity : AppCompatActivity() {
 
             binding.btnAdd.text = getString(R.string.button_edit_cara_image);
 
-            if(caraImage.image != Uri.EMPTY)
+            if(caraImage.image != "")
                 binding.chooseImage.text = getString(R.string.button_edit_image);
 
             Picasso.get()
@@ -59,16 +59,17 @@ class CreateCaraImageActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener() {
             caraImage.title = binding.caraImageTitle.text.toString()
+            caraImage.groupId = group.id
             if (caraImage.title.isEmpty()) {
                 Snackbar.make(it,R.string.hint_cara_image_title   , Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 if (edit) {
+                    app.groups.updateImage(caraImage)
                     app.caraImages.update(caraImage.copy())
                 } else {
                     val newImage = caraImage.copy()
-                    group.caraImages.add(newImage)
-                    app.caraImages.placemarks.add(newImage)
+                    app.groups.addImage(group, newImage)
                 }
             }
             setResult(RESULT_OK)
@@ -101,7 +102,7 @@ class CreateCaraImageActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            caraImage.image = result.data!!.data!!
+                            caraImage.image = result.data!!.data!!.toString()
                             Picasso.get()
                                 .load(caraImage.image)
                                 .into(binding.image)

@@ -73,6 +73,7 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
     override fun onCaraImageClick(caraImage: CaraImageModel) {
         val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
         launcherIntent.putExtra("placemark_edit", caraImage)
+        launcherIntent.putExtra("group", group)
         refreshIntentLauncher.launch(launcherIntent)
     }
 
