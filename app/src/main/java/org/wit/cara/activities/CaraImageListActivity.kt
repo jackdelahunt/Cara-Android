@@ -37,7 +37,7 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
 
         if (intent.hasExtra("group")) {
             group = intent.extras?.getParcelable("group")!!
-            group = app.groups.findById(group!!.id)!!
+            group = app.userStore.findGroupById(group!!.id)!!
         }
 
         val layoutManager = LinearLayoutManager(this)

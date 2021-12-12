@@ -32,7 +32,7 @@ class GroupMemStore : GroupStore {
     }
 
     override fun create(group: GroupModel) {
-        group.id = getId()
+        // group.id = getId()
         groups.add(group)
         write()
     }

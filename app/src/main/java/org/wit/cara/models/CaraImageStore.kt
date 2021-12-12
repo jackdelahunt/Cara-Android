@@ -12,12 +12,6 @@ interface CaraImageStore {
     fun update(caraImage: CaraImageModel)
 }
 
-var lastId = 0L
-
-internal fun getId(): Long {
-    return lastId++
-}
-
 class CaraImageMemStore : CaraImageStore {
 
     val placemarks = ArrayList<CaraImageModel>()
@@ -28,7 +22,7 @@ class CaraImageMemStore : CaraImageStore {
     }
 
     override fun create(caraImage: CaraImageModel) {
-        caraImage.id = getId()
+        // caraImage.id = getId()
         placemarks.add(caraImage)
         logAll()
     }
