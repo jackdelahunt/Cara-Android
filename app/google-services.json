@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "767313182710",
+    "project_id": "cara-a6833",
+    "storage_bucket": "cara-a6833.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767313182710:android:14b590b3348281129ed1d7",
+        "android_client_info": {
+          "package_name": "org.wit.cara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767313182710-n6s3cekclspmbppvoliv9elunlc65tg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtf5g7EeQrF9DKnbayUGljEiQM1ECd-VY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767313182710-n6s3cekclspmbppvoliv9elunlc65tg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
