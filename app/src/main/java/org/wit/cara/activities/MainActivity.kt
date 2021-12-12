@@ -35,16 +35,20 @@ class MainActivity : AppCompatActivity() {
 
         app = application as MainApp
         binding.groupButton.setOnClickListener {
+            if (!app.user.isSignedIn()) return@setOnClickListener;
+
             val launcherIntent = Intent(this, CaraGroupListActivity::class.java)
             refreshIntentLauncher.launch(launcherIntent)
         }
 
         binding.imagesButton.setOnClickListener {
+            if (!app.user.isSignedIn()) return@setOnClickListener;
             val launcherIntent = Intent(this, CaraImageListActivity::class.java)
             refreshIntentLauncher.launch(launcherIntent)
         }
 
         binding.signInButton.setOnClickListener {
+            if (app.user.isSignedIn()) return@setOnClickListener;
             val providers = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
 
             val signInIntent = AuthUI.getInstance()
@@ -66,9 +70,11 @@ class MainActivity : AppCompatActivity() {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
             val user = FirebaseAuth.getInstance().currentUser
-            i("USER SIGNED IN")
-            i(user?.uid)
-            i(user?.displayName)
+            if(user != null) {
+                app.user.displayName = user.displayName!!
+                app.user.uid = user.uid
+            }
+
         }
     }
 }

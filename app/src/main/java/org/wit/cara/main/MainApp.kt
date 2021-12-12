@@ -8,12 +8,14 @@ import com.google.firebase.ktx.Firebase
 import org.wit.cara.databinding.ActivityGroupListBinding
 import org.wit.cara.models.CaraImageMemStore
 import org.wit.cara.models.GroupMemStore
+import org.wit.cara.models.UserModel
 import timber.log.Timber
 
 lateinit var database: DatabaseReference
 
 class MainApp : Application() {
 
+    lateinit var user: UserModel
     lateinit var groups: GroupMemStore
     lateinit var caraImages: CaraImageMemStore
 
@@ -22,6 +24,7 @@ class MainApp : Application() {
         super.onCreate()
         FirebaseApp.initializeApp(this);
         database = Firebase.database("https://cara-a6833-default-rtdb.europe-west1.firebasedatabase.app/").reference
+        user = UserModel()
         groups = GroupMemStore()
         caraImages = CaraImageMemStore()
 
