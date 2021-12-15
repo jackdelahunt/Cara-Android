@@ -1,18 +1,26 @@
 package org.wit.cara.activities
 
+import android.app.UiModeManager
 import org.wit.cara.databinding.ActivityMainBinding
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
+import org.wit.cara.R
 import org.wit.cara.main.MainApp
 import timber.log.Timber.i
+import android.widget.CompoundButton
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +42,15 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAbove)
 
         app = application as MainApp
+
+        binding.darkmode.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        })
+
         binding.groupButton.setOnClickListener {
             if (!app.userStore.signedIn) return@setOnClickListener;
 
