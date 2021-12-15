@@ -66,7 +66,6 @@ class CreateCaraImageActivity : AppCompatActivity() {
             } else {
                 if (edit) {
                     app.userStore.updateImage(caraImage)
-                    app.caraImages.update(caraImage.copy())
                 } else {
                     val newImage = caraImage.copy()
                     app.userStore.addImage(newImage)

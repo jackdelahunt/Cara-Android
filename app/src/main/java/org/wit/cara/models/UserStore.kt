@@ -23,6 +23,15 @@ class UserMemStore {
         fetch()
     }
 
+    fun allImages(): ArrayList<CaraImageModel> {
+        var list = ArrayList<CaraImageModel>()
+        for (group in groups) {
+            list += group.caraImages
+        }
+
+        return list;
+    }
+
     fun findGroupById(id: Long): GroupModel? {
         for (group in groups)
             if (group.id == id) return group
@@ -52,7 +61,13 @@ class UserMemStore {
     fun addGroup(group: GroupModel) {
         group.id = getId()
         groups.add(group)
-        postGroup(group)
+        postGroup(groups.size - 1)
+    }
+
+    fun deleteImage(caraImageModel: CaraImageModel) {
+        val groupModel = findGroupById(caraImageModel.groupId)!!
+        groupModel.caraImages.remove(caraImageModel)
+        postGroup(groups.indexOf(groupModel))
     }
 
 
@@ -65,9 +80,9 @@ class UserMemStore {
         database.updateChildren(childUpdates)
     }
 
-    private fun postGroup(group: GroupModel) {
+    private fun postGroup(index: Int) {
         val childUpdates = hashMapOf<String, Any>(
-            "/users/${user.uid}/groups/${group.id}/" to group
+            "/users/${user.uid}/groups/$index/" to groups[index]
         )
 
         database.updateChildren(childUpdates)

@@ -1,13 +1,13 @@
 package org.wit.cara.main
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.app.UiModeManager.MODE_NIGHT_YES
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import org.wit.cara.databinding.ActivityGroupListBinding
-import org.wit.cara.models.CaraImageMemStore
-import org.wit.cara.models.GroupMemStore
 import org.wit.cara.models.UserMemStore
 import org.wit.cara.models.UserModel
 import timber.log.Timber
@@ -17,8 +17,6 @@ lateinit var database: DatabaseReference
 class MainApp : Application() {
 
     lateinit var userStore: UserMemStore
-    // lateinit var groups: GroupMemStore
-    lateinit var caraImages: CaraImageMemStore
 
 
     override fun onCreate() {
@@ -26,8 +24,6 @@ class MainApp : Application() {
         FirebaseApp.initializeApp(this);
         database = Firebase.database("https://cara-a6833-default-rtdb.europe-west1.firebasedatabase.app/").reference
         userStore = UserMemStore()
-        // groups = GroupMemStore()
-        caraImages = CaraImageMemStore()
 
         Timber.plant(Timber.DebugTree())
     }
