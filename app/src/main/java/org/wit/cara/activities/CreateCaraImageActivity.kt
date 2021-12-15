@@ -54,7 +54,7 @@ class CreateCaraImageActivity : AppCompatActivity() {
 
         if (intent.hasExtra("group")) {
             group = intent.extras?.getParcelable("group")!!
-            group = app.groups.findById(group.id)!!
+            group = app.userStore.findGroupById(group.id)!!
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -65,11 +65,10 @@ class CreateCaraImageActivity : AppCompatActivity() {
                     .show()
             } else {
                 if (edit) {
-                    app.groups.updateImage(caraImage)
-                    app.caraImages.update(caraImage.copy())
+                    app.userStore.updateImage(caraImage)
                 } else {
                     val newImage = caraImage.copy()
-                    app.groups.addImage(group, newImage)
+                    app.userStore.addImage(newImage)
                 }
             }
             setResult(RESULT_OK)

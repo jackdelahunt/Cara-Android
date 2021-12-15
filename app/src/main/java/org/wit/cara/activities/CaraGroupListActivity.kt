@@ -33,7 +33,7 @@ class CaraGroupListActivity : AppCompatActivity(), GroupListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = GroupAdapter(app.groups.findAll(),this)
+        binding.recyclerView.adapter = GroupAdapter(app.userStore.groups,this)
 
         registerRefreshCallback()
     }

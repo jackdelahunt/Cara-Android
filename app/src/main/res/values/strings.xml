@@ -15,4 +15,5 @@
     <string name="select_image">Select image</string>
     <string name="hint_group_button">Groups</string>
     <string name="hint_image_button">Images</string>
+    <string name="hint_sign_in_button">Sign In</string>
 </resources>

@@ -42,7 +42,7 @@ class CreateGroupActivity : AppCompatActivity() {
                 Snackbar.make(it,R.string.hint_cara_image_title   , Snackbar.LENGTH_LONG)
                     .show()
             } else {
-                app.groups.create(group.copy())
+                app.userStore.addGroup(group.copy())
             }
             setResult(RESULT_OK)
             finish()

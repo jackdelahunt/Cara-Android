@@ -37,7 +37,7 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
 
         if (intent.hasExtra("group")) {
             group = intent.extras?.getParcelable("group")!!
-            group = app.groups.findById(group!!.id)!!
+            group = app.userStore.findGroupById(group!!.id)!!
         }
 
         val layoutManager = LinearLayoutManager(this)
@@ -46,7 +46,7 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
         if (group != null) {
             binding.recyclerView.adapter = CaraImageAdapter(group!!.caraImages, this)
         } else {
-            binding.recyclerView.adapter = CaraImageAdapter(app.caraImages.findAll(), this)
+            binding.recyclerView.adapter = CaraImageAdapter(app.userStore.allImages(), this)
         }
 
         registerRefreshCallback()
@@ -73,8 +73,14 @@ class CaraImageListActivity : AppCompatActivity(), CaraImageListener {
     override fun onCaraImageClick(caraImage: CaraImageModel) {
         val launcherIntent = Intent(this, CreateCaraImageActivity::class.java)
         launcherIntent.putExtra("placemark_edit", caraImage)
-        launcherIntent.putExtra("group", group)
-        refreshIntentLauncher.launch(launcherIntent)
+        if(group == null) {
+            val foundGroup = app.userStore.findGroupById(caraImage.groupId)
+            launcherIntent.putExtra("group", foundGroup)
+            refreshIntentLauncher.launch(launcherIntent)
+        } else {
+            launcherIntent.putExtra("group", group)
+            refreshIntentLauncher.launch(launcherIntent)
+        }
     }
 
     private fun registerRefreshCallback() {
